@@ -1,0 +1,6 @@
+[submodule "ec_ecology_toolbox"]
+	path = ec_ecology_toolbox
+	url = https://github.com/emilydolson/ec_ecology_toolbox.git
+[submodule "Empirical"]
+	path = Empirical
+	url = https://github.com/devosoft/Empirical.git

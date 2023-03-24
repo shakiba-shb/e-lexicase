@@ -1,0 +1,38 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        path: main
+    - name: Checkout Empirical
+      uses: actions/checkout@v3
+      with:
+        repository: devosoft/Empirical
+        path: Empirical
+        ref: mabe-systematics
+    - name: Checkout Catch
+      uses: actions/checkout@v3
+      with:
+        repository: catchorg/Catch2
+        path: main/Catch2
+        ref: v2.x
+    - name: make
+      run: cd main && make test CXX=g++ && gcov test-test_interaction_networks.cc && ls
+    - uses: codecov/codecov-action@v3
+      with:
+        root_dir: main/
+        directory: main/
+        gcov: true
+        verbose: true
